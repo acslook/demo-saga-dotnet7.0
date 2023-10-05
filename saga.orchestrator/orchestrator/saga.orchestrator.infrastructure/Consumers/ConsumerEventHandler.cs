@@ -16,5 +16,8 @@ namespace saga.orchestrator.infrastructure.Consumers
 
         public async Task On(CreatedSaleEvent @event) => 
                 await _mediator.Send(new CreatedSaleEventCommand(@event));
+
+        public async Task On(InventoryPreparedEvent @event) =>
+                await _mediator.Send(new InventoryPreparedEventCommand(@event));
     }
 }

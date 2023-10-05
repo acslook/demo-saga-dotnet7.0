@@ -17,7 +17,7 @@ namespace inventory.infrastructure.Consumers
             _serviceProvider = serviceProvider;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Event consumer service running");
 
@@ -25,10 +25,8 @@ namespace inventory.infrastructure.Consumers
             {
                 var eventConsumer = scope.ServiceProvider.GetRequiredService<IEventConsumer>();
 
-                Task.Run(() => eventConsumer.Consume(KAFKA_TOPIC), cancellationToken);
+                await Task.Run(() => eventConsumer.Consume(KAFKA_TOPIC), cancellationToken);
             }
-
-            return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

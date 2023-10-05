@@ -30,6 +30,7 @@ namespace saga.orchestrator.infrastructure.Consumers.Converters
             return typeDiscriminator switch
             {
                 nameof(CreatedSaleEvent) => JsonSerializer.Deserialize<CreatedSaleEvent>(json, options),
+                nameof(InventoryPreparedEvent) => JsonSerializer.Deserialize<InventoryPreparedEvent>(json, options),
                 _ => throw new JsonException($"{typeDiscriminator} is not support yet!")
             };
         }

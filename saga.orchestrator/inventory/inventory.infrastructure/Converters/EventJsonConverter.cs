@@ -19,7 +19,7 @@ namespace inventory.infrastructure.Converters
                 throw new JsonException($"Failed to parse {nameof(JsonDocument)}");
             }
 
-            if (!doc.RootElement.TryGetProperty("Type", out var type))
+            if (!doc.RootElement.TryGetProperty("EventName", out var type))
             {
                 throw new JsonException("Could not detect the Type discriminator property!");
             }

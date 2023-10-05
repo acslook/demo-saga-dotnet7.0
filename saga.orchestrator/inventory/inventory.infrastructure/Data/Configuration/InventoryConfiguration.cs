@@ -8,6 +8,8 @@ namespace inventory.infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Inventory> builder)
         {
+            builder.HasKey(t => t.Id);
+
             builder.Property(t => t.ProductId)
                 .IsRequired();
 

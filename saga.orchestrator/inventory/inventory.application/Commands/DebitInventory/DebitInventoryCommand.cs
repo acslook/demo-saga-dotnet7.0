@@ -5,9 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace inventory.application.Commands.DebitInventory
 {
-    public record DebitInventoryCommand : IRequest
+    public record DebitInventoryCommand(CreatedSaleEvent CreatedSaleEvent) : IRequest
     {
-        public CreatedSaleEvent CreatedSaleEvent { get; set; }
     }
 
     public class DebitInventoryCommandHandler : IRequestHandler<DebitInventoryCommand>
@@ -34,6 +33,8 @@ namespace inventory.application.Commands.DebitInventory
             }
 
             inventory.DebitQuantity(request.CreatedSaleEvent.Sale.Quantity);
+
+            inventory.AddDomainEvent(new InventoryPreparedEvent(request.CreatedSaleEvent.Sale));
 
             await _context.SaveChangesAsync(cancellationToken);
         }

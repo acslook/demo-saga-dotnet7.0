@@ -1,4 +1,5 @@
-﻿using inventory.application.Consumers;
+﻿using inventory.application.Commands.DebitInventory;
+using inventory.application.Consumers;
 using inventory.domain.Events;
 using MediatR;
 
@@ -13,6 +14,6 @@ namespace inventory.infrastructure.Consumers
             _mediator = mediator;
         }
 
-        public async Task On(CreatedSaleEvent @event) => await _mediator.Send(@event);
+        public async Task On(CreatedSaleEvent @event) => await _mediator.Send(new DebitInventoryCommand(@event));
     }
 }
